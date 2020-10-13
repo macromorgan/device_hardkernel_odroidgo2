@@ -20,7 +20,7 @@ the audio to work (whether it works in Android is another matter).
 To build, sync against the AOSP branch (I am using 11.0.0.r3 currently).
 Create an XML file in the local_manifests folder and add the following:
 
-<?xml version="1.0" encoding="UTF-8"?>
+```<?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <remote  name="gitlab"   fetch="https://gitlab.freedesktop.org/" />
   <remote  name="glodroid" fetch="https://github.com/glodroid/" />
