@@ -32,6 +32,7 @@ Create an XML file in the local_manifests folder and add the following:
   <project path="external/mesa3d"          remote="glodroid" name="glodroid_forks.git" revision="refs/tags/mesa3d-v5" clone-depth="1" />
   <project path="external/gbm_gralloc"     remote="glodroid" name="glodroid_forks.git" revision="refs/tags/gbm_gralloc-v2" clone-depth="1" />
 </manifest>
+```
 
 Then do a repo sync to bring in all the new/additional stuff.
 
