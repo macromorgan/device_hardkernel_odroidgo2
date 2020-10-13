@@ -1,0 +1,20 @@
+/dev/pvr_sync                                          0666    system       graphics
+/dev/composer                                          0660    system       graphics
+/dev/video0                                            0666    media        media
+/dev/graphics/fb0                                      0666    system       graphics
+/dev/tee0                                              0660    system       keystore
+/dev/teepriv0                                          0660    system       keystore
+/dev/ttyS*						0666	system	system
+/dev/ttyUSB0                                           0666    system       system
+/dev/rfkill                                            0660    bluetooth    net_bt
+/dev/ion                                               0664    system       system
+
+# gpu
+/dev/sw_sync            0660   system     graphics
+/dev/dri/card*          0660   system     graphics
+/dev/dri/*              0666   system     graphics
+/dev/dri/renderD*        0666   system     graphics
+
+#common char device files
+/dev/iio:device* 0666 system system
+/dev/input/event* 0666 system system
