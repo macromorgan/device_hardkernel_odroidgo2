@@ -46,6 +46,7 @@ PRODUCT_PACKAGES += \
 	libGLES_mesa \
 	hwcomposer.drm \
 	gralloc.gbm \
+#Most of these don't stick for some reason?
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=150 \
 	ro.hardware.gralloc=gbm \
@@ -161,11 +162,11 @@ PRODUCT_PACKAGES += \
 #    android.hardware.boot@1.1-impl \
 #    android.hardware.boot@1.1-service \
 
-#Note that Mesa is using swrast I think
+#Mesa not working yet
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=150 \
 	ro.surface_flinger.primary_display_orientation=ORIENTATION_270 \
-	ro.hardware.egl=mesa \
+	ro.hardware.egl=swiftshader \
 	debug.sf.nobootanimation=0
 
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
