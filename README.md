@@ -20,7 +20,7 @@ the audio to work (whether it works in Android is another matter).
 To build, sync against the AOSP branch (I am using 11.0.0.r3 currently).
 Create an XML file in the local_manifests folder and add the following:
 
-<?xml version="1.0" encoding="UTF-8"?>
+```<?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <remote  name="gitlab"   fetch="https://gitlab.freedesktop.org/" />
   <remote  name="glodroid" fetch="https://github.com/glodroid/" />
@@ -32,6 +32,7 @@ Create an XML file in the local_manifests folder and add the following:
   <project path="external/mesa3d"          remote="glodroid" name="glodroid_forks.git" revision="refs/tags/mesa3d-v5" clone-depth="1" />
   <project path="external/gbm_gralloc"     remote="glodroid" name="glodroid_forks.git" revision="refs/tags/gbm_gralloc-v2" clone-depth="1" />
 </manifest>
+```
 
 Then do a repo sync to bring in all the new/additional stuff.
 
