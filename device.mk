@@ -52,10 +52,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.hardware.gralloc=gbm \
 	ro.hardware.hwcomposer=drm \
 	debug.sf.no_hw_vsync=1 \
-	hwc.drm.use_framebuffer_target=1 \
-	hwc.drm.use_overlay_planes=0 \
-	ro.opengles.version=196608 \
+	ro.opengles.version=131072 \
 	persist.demo.rotationlock=1
+
+#hwc.drm.use_overlay_planes=0 \
 
 #Gatekeeper
 PRODUCT_PACKAGES += \
@@ -164,10 +164,10 @@ PRODUCT_PACKAGES += \
 
 #Mesa not working yet
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.sf.lcd_density=150 \
 	ro.surface_flinger.primary_display_orientation=ORIENTATION_270 \
-	ro.hardware.egl=swiftshader \
+	ro.hardware.egl=mesa \
 	debug.sf.nobootanimation=0
+
 
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 
@@ -247,20 +247,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.adb.tcp.port=5037
 
-#Speed Tweaks
-#PRODUCT_PROPERTY_OVERRIDES += \
-#	ro.kernel.android.checkjni=0 \
-#	persist.sys.zram_enabled=1 \
-#	persist.sys.purgeable_assets=1 \
-#	debug.atrace.tags.enableflags=0 \
-#	debugtool.anrhistory=0 \
-#	profiler.debugmonitor=false \
-#	profiler.launch=false \
-#	profiler.hung.dumpdobugreport=false \
-#	persist.service.pcsync.enable=0 \
-#	persist.service.lgospd.enable=0 \
-#	pm.dexopt.downgrade_after_inactive_days=10
-
 #Stuff we don't need
 PRODUCT_PROPERTY_OVERRIDES += \
 	config.disable_rtt=true \
@@ -273,12 +259,33 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 	android.hardware.cas@1.2
 
-# Disable Scudo outside of eng builds to save RAM.
+#Low RAM Tweaks
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
+PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
+PRODUCT_RUNTIMES := runtime_libart_default
 PRODUCT_DISABLE_SCUDO := true
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-
-#This causes a mm kernel panic for some reason at boot, but saves RAM
-PRODUCT_PROPERTY_OVERRIDES += ro.config.low_ram=true
-
-# Do not generate libartd.
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.config.low_ram=true \
+       ro.lmk.medium=700 \
+       dalvik.vm.madvise-random=true \
+       ro.lmk.critical_upgrade=true \
+       ro.lmk.upgrade_pressure=40 \
+       ro.lmk.downgrade_pressure=60 \
+       ro.lmk.kill_heaviest_task=false \
+       ro.statsd.enable=true \
+       pm.dexopt.downgrade_after_inactive_days=10 \
+       pm.dexopt.shared=quicken \
+       dalvik.vm.heapgrowthlimit=128m \
+       dalvik.vm.heapsize=256m \
+       ro.kernel.android.checkjni=0 \
+       persist.sys.zram_enabled=1 \
+       persist.sys.purgeable_assets=1 \
+       debug.atrace.tags.enableflags=0 \
+       debugtool.anrhistory=0 \
+       profiler.debugmonitor=false \
+       profiler.launch=false \
+       profiler.hung.dumpdobugreport=false \
+       persist.service.pcsync.enable=0 \
+       persist.service.lgospd.enable=0 \

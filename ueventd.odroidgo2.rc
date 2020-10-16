@@ -10,8 +10,8 @@
 /dev/ion                                               0664    system       system
 
 # gpu
-/dev/sw_sync            0660   system     graphics
-/dev/dri/card*          0660   system     graphics
+/dev/sw_sync            0666   system     graphics
+/dev/dri/card*          0666   system     graphics
 /dev/dri/*              0666   system     graphics
 /dev/dri/renderD*        0666   system     graphics
 

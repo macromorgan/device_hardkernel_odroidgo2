@@ -9,7 +9,7 @@ on early-init
 
 #Pretty sure I need this for Panfrost GLES 3.0
 on init
-    export PAN_MESA_DEBUG gles3
+    export PAN_MESA_DEBUG bifrost
     write /sys/class/graphics/fbcon/cursor_blink 0
 
 on fs
@@ -21,6 +21,10 @@ on post-fs
 
 on post-fs-data
     setprop vold.post_fs_data_done 1
+
+on boot
+    setprop service.adb.tcp.port 5037
+    start adbd
 
 on zygote-start
     mkdir /data/vendor/wifi 0771 wifi wifi
@@ -34,6 +38,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     interface android.hardware.wifi.supplicant@1.0::ISupplicant default
     interface android.hardware.wifi.supplicant@1.1::ISupplicant default
     interface android.hardware.wifi.supplicant@1.2::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.3::ISupplicant default
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled

@@ -56,7 +56,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 #Mesa Drivers
-BOARD_GPU_DRIVERS := panfrost kmsro swrast
+BOARD_GPU_DRIVERS := panfrost kmsro
 USE_OPENGL_RENDERER := true
 BOARD_USE_LEGACY_UI := true
 BOARD_USES_GRALLOC_HANDLE := true
