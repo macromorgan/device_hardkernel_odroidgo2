@@ -33,11 +33,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.mapper@2.0-impl \
-PRODUCT_PACKAGES += \
-	libEGL_swiftshader \
-	libGLESv1_CM_swiftshader \
-	libGLESv2_swiftshader \
-#Need for Pixelflinger I guess
+
 PRODUCT_PACKAGES += \
 	android.hardware.configstore@1.1-service
 
@@ -46,7 +42,7 @@ PRODUCT_PACKAGES += \
 	libGLES_mesa \
 	hwcomposer.drm \
 	gralloc.gbm \
-#Most of these don't stick for some reason?
+
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=150 \
 	ro.hardware.gralloc=gbm \
@@ -54,8 +50,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	debug.sf.no_hw_vsync=1 \
 	ro.opengles.version=131072 \
 	persist.demo.rotationlock=1
-
-#hwc.drm.use_overlay_planes=0 \
 
 #Gatekeeper
 PRODUCT_PACKAGES += \
@@ -162,13 +156,12 @@ PRODUCT_PACKAGES += \
 #    android.hardware.boot@1.1-impl \
 #    android.hardware.boot@1.1-service \
 
-#Mesa not working yet
+#Mesa working now it seems
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.surface_flinger.primary_display_orientation=ORIENTATION_270 \
 	ro.hardware.egl=mesa \
-	debug.sf.nobootanimation=0
 
-
+#Turns out Mesa Needs this too...
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 
 PRODUCT_COPY_FILES += \
@@ -255,7 +248,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	config.disable_consumerir=true \
 	config.disable_cameraservice=true
 
-#Why the fuck do I need this?
+#Why do I need this?
 PRODUCT_PACKAGES += \
 	android.hardware.cas@1.2
 
