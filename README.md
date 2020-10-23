@@ -1,8 +1,4 @@
 This is my first attempt at creating an Android AOSP build using the Panfrost graphics stack.
-Thus far I am not able to get it to work (except using software composers/swiftshader/swrast).
-I'm uploading it to github in the hopes that someone more skilled or experienced than I can
-get this to work properly.
-
 Extra massive special thanks to notime2d8; without their help I'd be staring at a command
 prompt screaming "why won't you fucking boot".
 
@@ -17,24 +13,7 @@ important or not.  Even using the upstream 5.9 kernel the panel still doesn't in
 of the time.  Also there are a few crashes due to my blunt force insertion of some code to get
 the audio to work (whether it works in Android is another matter).
 
-To build, sync against the AOSP branch (I am using 11.0.0.r3 currently).
-Create an XML file in the local_manifests folder and add the following:
-
-```<?xml version="1.0" encoding="UTF-8"?>
-<manifest>
-  <remote  name="gitlab"   fetch="https://gitlab.freedesktop.org/" />
-  <remote  name="glodroid" fetch="https://github.com/glodroid/" />
-  <remote  name="android-rpi" fetch="https://github.com/android-rpi/" />
-  <extend-project name="platform/external/libdrm" revision="fb806e1a436e6ff61f1e10b105b87c6494243d9c"/>
-  <remove-project name="platform/external/drm_hwcomposer" />
-  <remove-project name="platform/external/mesa3d" />
-  <project path="external/drm_hwcomposer"  remote="glodroid" name="glodroid_forks.git" revision="refs/tags/drm_hwcomposer-v1" clone-depth="1" />
-  <project path="external/mesa3d"          remote="glodroid" name="glodroid_forks.git" revision="refs/tags/mesa3d-v5" clone-depth="1" />
-  <project path="external/gbm_gralloc"     remote="glodroid" name="glodroid_forks.git" revision="refs/tags/gbm_gralloc-v2" clone-depth="1" />
-</manifest>
-```
-
-Then do a repo sync to bring in all the new/additional stuff.
+To build, sync against the AOSP branch (I am using 11.0.0.r8 currently).
 
 The definition from this repository should be saved at <<AOSP_ROOT>>/device/hardkernel/odroidgo2
 Select full_odroidgo2-userdebug from the lunch menu, then build with m droid -jx (where x is
