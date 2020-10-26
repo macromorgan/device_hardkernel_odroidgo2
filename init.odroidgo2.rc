@@ -7,10 +7,9 @@ on early-init
     chown graphics graphics /sys/kernel/debug/sync/info
     mkdir /dev/input
 
-#Pretty sure I need this for Panfrost GLES 3.0
+#Panfrost won't work without this!
 on init
     export PAN_MESA_DEBUG bifrost
-    write /sys/class/graphics/fbcon/cursor_blink 0
 
 on fs
     mount_all /vendor/etc/fstab.odroidgo2
