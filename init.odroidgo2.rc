@@ -6,6 +6,8 @@ on early-init
     chmod 777 /sys/kernel/debug/sync/sw_sync
     chown graphics graphics /sys/kernel/debug/sync/info
     mkdir /dev/input
+    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d \
+        /vendor/lib/modules esp8089
 
 #Panfrost won't work without this!
 on init

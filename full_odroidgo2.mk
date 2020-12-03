@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/go_defaults_512.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/go_defaults_512.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/hardkernel/odroidgo2/device.mk)
 
 PRODUCT_NAME := full_odroidgo2
@@ -30,3 +30,6 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # API Level
 PRODUCT_SHIPPING_API_LEVEL := 28
+
+TARGET_SCREEN_HEIGHT := 480
+TARGET_SCREEN_WIDTH := 320

@@ -22,57 +22,70 @@ TARGET_PREBUILT_KERNEL := device/hardkernel/odroidgo2/kernel/Image
 PRODUCT_COPY_FILES += \
 	$(TARGET_PREBUILT_KERNEL):kernel
 
+BOARD_VENDOR_KERNEL_MODULES += \
+	device/hardkernel/odroidgo2/kernel-modules/esp8089.ko
+
+TARGET_DEVICE_KERNEL_HEADERS := \
+	device/hardkernel/odroidgo2/kernel-headers
+
+TARGET_KERNEL_CONFIG := device/hardkernel/odroidgo2/kernel/config
+
 PRODUCT_AAPT_CONFIG := normal mdpi ldpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 PRODUCT_AAPT_PREBUILT_DPI := mdpi ldpi
 PRODUCT_CHARACTERISTICS := tablet
 
+#Mesa Panfrost
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.mapper@2.0-impl \
-
-PRODUCT_PACKAGES += \
-	android.hardware.configstore@1.1-service
-
-#Open Source hwcomposer/gralloc
-PRODUCT_PACKAGES += \
+	android.hardware.graphics.allocator@2.0-service \
+	android.hardware.graphics.allocator@2.0-impl \
+	android.hardware.graphics.composer@2.1-service \
+	android.hardware.graphics.composer@2.1-impl \
+	android.hardware.graphics.mapper@2.0-impl \
+	android.hardware.configstore@1.1-service \
 	libGLES_mesa \
 	hwcomposer.drm \
 	gralloc.gbm \
-
+	libGLES_android
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=150 \
 	ro.hardware.gralloc=gbm \
 	ro.hardware.hwcomposer=drm \
 	debug.sf.no_hw_vsync=1 \
 	ro.opengles.version=131072 \
-	persist.demo.rotationlock=1
+	persist.demo.rotationlock=1 \
+	vendor.hwc.drm.use_overlay_planes=0
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+        ro.surface_flinger.primary_display_orientation=ORIENTATION_270 \
+        ro.hardware.egl=mesa
+PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 
-#Gatekeeper
+#Gatekeeper HAL
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software \
 
+#Keymaster HAL
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-service \
-    android.hardware.keymaster@3.0-impl \
+	android.hardware.keymaster@3.0-service \
+	android.hardware.keymaster@3.0-impl \
+	keystore.ranchu
 
+#Health HAL
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service \
-    android.hardware.health@2.0-impl-default \
+	android.hardware.health@2.0-service \
+	android.hardware.health@2.0-impl-default \
 
+#Memtrack HAL
 PRODUCT_PACKAGES += \
-    memtrack.default \
-    android.hardware.memtrack@1.0-service \
-    android.hardware.memtrack@1.0-impl
+	memtrack.default \
+	android.hardware.memtrack@1.0-service \
+	android.hardware.memtrack@1.0-impl
 
-# PowerHAL
-#PRODUCT_PACKAGES += \
-#    power.default \
-#    android.hardware.power@1.0-impl \
-#    android.hardware.power@1.0-service \
+#Power HAL
+PRODUCT_PACKAGES += \
+	power.default \
+	android.hardware.power@1.0-impl \
+	android.hardware.power@1.0-service \
 
 #Audio Stuff
 PRODUCT_PACKAGES += \
@@ -132,8 +145,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.2-service.clearkey \
     android.hardware.drm@1.2-service.widevine
 
-PRODUCT_PACKAGES += libGLES_android
-
 #OMX
 PRODUCT_PACKAGES += \
 	android.hardware.media.omx@1.0-service \
@@ -151,47 +162,41 @@ PRODUCT_PACKAGES += \
 	libOmxVenc \
 	minijail0
 
-#PRODUCT_PACKAGES += \
-#    bootctrl.default \
-#    android.hardware.boot@1.1-impl \
-#    android.hardware.boot@1.1-service \
-
-#Mesa working now it seems
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.surface_flinger.primary_display_orientation=ORIENTATION_270 \
-	ro.hardware.egl=mesa \
-
-#Turns out Mesa Needs this too...
-PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
-
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/fstab.odroidgo2:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.odroidgo2 \
 	$(LOCAL_PATH)/fstab.odroidgo2:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.odroidgo2
 
 PRODUCT_COPY_FILES += \
+    	$(LOCAL_PATH)/odroidgo2_joypad.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/odroidgo2_joypad.kl \
         $(LOCAL_PATH)/init.odroidgo2.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.odroidgo2.rc \
 	$(LOCAL_PATH)/ueventd.odroidgo2.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 
-
-DEVICE_PACKAGE_OVERLAYS := device/linaro/hikey/overlay
+DEVICE_PACKAGE_OVERLAYS := device/hardkernel/odroidgo2/overlay
 
 # Wifi Stuff
 PRODUCT_PACKAGES += \
 	libwpa_client \
 	wpa_supplicant \
 	wpa_supplicant.conf \
-	android.hardware.wifi.supplicant@1.3-service \
+	wpa_cli \
+	android.hardware.wifi.supplicant@1.2-service \
 	hostapd \
 	hostapd.conf \
-	android.hardware.wifi.hostapd@1.2-service \
+	android.hardware.wifi.hostapd@1.0-service \
 	wificond \
-	wifilogd
+	wifilogd \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.carrier=wifi-only
 	wifi.interface=wlan0 \
 	wifi.supplicant_scan_interval=15 \
 	ro.boot.wificountrycode=US \
 	wifi.direct.interface=p2p0
+
+# Netutils
+PRODUCT_PACKAGES += \
+	android.system.net.netd@1.0 \
+	libandroid_net \
+	netutils-wrapper-1.0
 
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES +=  \
@@ -222,7 +227,9 @@ PRODUCT_COPY_FILES +=  \
 
 PRODUCT_PACKAGES += \
 	Launcher3Go \
-	vndk_package
+	vndk_package \
+	LeanbackIME \
+	Terminal
 
 #No Bluetooth
 PRODUCT_PACKAGES += \
@@ -253,7 +260,6 @@ PRODUCT_PACKAGES += \
 	android.hardware.cas@1.2
 
 #Low RAM Tweaks
-PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
 PRODUCT_RUNTIMES := runtime_libart_default
 PRODUCT_DISABLE_SCUDO := true
