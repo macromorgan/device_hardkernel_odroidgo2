@@ -104,7 +104,7 @@ allow untrusted_app_27 dri_device:chr_file { getattr open read write };
 dontaudit untrusted_app_27 sysfs:file { getattr open read };
 dontaudit vendor_init shell_prop:property_service set;
 
-allow init self:capability2 perfmon;
+#allow init self:capability2 perfmon;
 allow platform_app device:dir { open read };
 dontaudit platform_app sysfs:file { getattr open read };
 allow priv_app device:dir open;
