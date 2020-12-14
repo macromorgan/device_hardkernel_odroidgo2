@@ -30,10 +30,6 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 # Enable 64-bits binder
 TARGET_USES_64_BIT_BINDER := true
 
-#Not in our kernel???
-ENABLE_CPUSETS := false
-ENABLE_SCHEDBOOST := false
-
 #Debug options???
 BOARD_USE_DRM := true
 VINTF_ENFORCE_NO_UNUSED_HALS := true

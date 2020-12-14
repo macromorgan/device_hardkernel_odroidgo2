@@ -84,6 +84,7 @@ PRODUCT_PACKAGES += \
 #Power HAL
 PRODUCT_PACKAGES += \
 	power.default \
+	power.x86 \
 	android.hardware.power@1.0-impl \
 	android.hardware.power@1.0-service \
 
@@ -177,20 +178,13 @@ DEVICE_PACKAGE_OVERLAYS := device/hardkernel/odroidgo2/overlay
 PRODUCT_PACKAGES += \
 	libwpa_client \
 	wpa_supplicant \
-	wpa_supplicant.conf \
-	wpa_cli \
-	android.hardware.wifi.supplicant@1.2-service \
 	hostapd \
-	hostapd.conf \
-	android.hardware.wifi.hostapd@1.0-service \
 	wificond \
-	wifilogd \
+	android.hardware.wifi@1.0-service
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.carrier=wifi-only
-	wifi.interface=wlan0 \
 	wifi.supplicant_scan_interval=15 \
-	ro.boot.wificountrycode=US \
-	wifi.direct.interface=p2p0
+	wifi.interface=wlan0
 
 # Netutils
 PRODUCT_PACKAGES += \
@@ -216,14 +210,12 @@ PRODUCT_COPY_FILES +=  \
 	frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.software.device_admin.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_admin.xml \
         frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml \
         frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
+	frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml \
 	frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
 	frameworks/native/data/etc/android.hardware.faketouch.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.faketouch.xml \
 	$(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
-	$(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-	$(LOCAL_PATH)/configs/wifi/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant.conf \
-	$(LOCAL_PATH)/configs/wifi/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
+	$(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
 
 PRODUCT_PACKAGES += \
 	Launcher3Go \
