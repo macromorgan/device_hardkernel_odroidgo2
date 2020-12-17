@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.graphics.allocator@2.0-impl \
 	android.hardware.graphics.composer@2.1-service \
 	android.hardware.graphics.composer@2.1-impl \
-	android.hardware.graphics.mapper@2.0-impl \
+	android.hardware.graphics.mapper@2.0-impl-2.1 \
 	android.hardware.configstore@1.1-service \
 	libGLES_mesa \
 	hwcomposer.drm \
@@ -179,18 +179,16 @@ PRODUCT_PACKAGES += \
 	libwpa_client \
 	wpa_supplicant \
 	hostapd \
-	wificond \
-	android.hardware.wifi@1.0-service
+	wificond
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.carrier=wifi-only
 	wifi.supplicant_scan_interval=15 \
 	wifi.interface=wlan0
 
 # Netutils
-PRODUCT_PACKAGES += \
-	android.system.net.netd@1.0 \
-	libandroid_net \
-	netutils-wrapper-1.0
+#PRODUCT_PACKAGES += \
+#	android.system.net.netd@1.0 \
+#	libandroid_net \
+#	netutils-wrapper-1.0
 
 # Copy hardware config file(s)
 PRODUCT_COPY_FILES +=  \
@@ -224,8 +222,8 @@ PRODUCT_PACKAGES += \
 	Terminal
 
 #No Bluetooth
-PRODUCT_PACKAGES += \
-    remove-Bluetooth
+#PRODUCT_PACKAGES += \
+#    remove-Bluetooth
 
 # Build and run only ART
 PRODUCT_RUNTIMES := runtime_libart_default
@@ -242,10 +240,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #Stuff we don't need
 PRODUCT_PROPERTY_OVERRIDES += \
 	config.disable_rtt=true \
-	config.disable_bluetooth=true \
 	config.disable_vrmanager=true \
 	config.disable_consumerir=true \
 	config.disable_cameraservice=true
+#	config.disable_bluetooth=true \
 
 #Why do I need this?
 PRODUCT_PACKAGES += \
