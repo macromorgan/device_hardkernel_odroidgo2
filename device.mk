@@ -25,9 +25,6 @@ PRODUCT_COPY_FILES += \
 BOARD_VENDOR_KERNEL_MODULES += \
 	device/hardkernel/odroidgo2/kernel-modules/esp8089.ko
 
-TARGET_DEVICE_KERNEL_HEADERS := \
-	device/hardkernel/odroidgo2/kernel-headers
-
 TARGET_KERNEL_CONFIG := device/hardkernel/odroidgo2/kernel/config
 
 PRODUCT_AAPT_CONFIG := normal mdpi ldpi
