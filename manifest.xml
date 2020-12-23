@@ -122,4 +122,5 @@
             <instance>default</instance>
         </interface>
     </hal>
+<uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
 </manifest>
