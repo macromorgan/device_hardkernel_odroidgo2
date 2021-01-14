@@ -27,19 +27,16 @@ BOARD_VENDOR_KERNEL_MODULES += \
 
 TARGET_KERNEL_CONFIG := device/hardkernel/odroidgo2/kernel/config
 
-PRODUCT_AAPT_CONFIG := normal mdpi ldpi
-PRODUCT_AAPT_PREF_CONFIG := ldpi
-PRODUCT_AAPT_PREBUILT_DPI := mdpi ldpi
 PRODUCT_CHARACTERISTICS := tablet
 
 #Mesa Panfrost
 PRODUCT_PACKAGES += \
+	android.hardware.configstore@1.1-service \
 	android.hardware.graphics.allocator@2.0-service \
 	android.hardware.graphics.allocator@2.0-impl \
 	android.hardware.graphics.composer@2.1-service \
 	android.hardware.graphics.composer@2.1-impl \
 	android.hardware.graphics.mapper@2.0-impl-2.1 \
-	android.hardware.configstore@1.1-service \
 	libGLES_mesa \
 	hwcomposer.drm \
 	gralloc.gbm \
@@ -221,6 +218,12 @@ PRODUCT_PACKAGES += \
 #No Bluetooth
 #PRODUCT_PACKAGES += \
 #    remove-Bluetooth
+
+PRODUCT_PACKAGES += \
+    remove-BlockedNumberProvider \
+    remove-Telecom \
+    remove-TeleService \
+    remove-MmsService \
 
 # Build and run only ART
 PRODUCT_RUNTIMES := runtime_libart_default
